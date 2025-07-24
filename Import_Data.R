@@ -1,65 +1,71 @@
-library(Seurat)
-library(Matrix)
-library(dplyr)
-library(stringr)
+# Load necessary libraries
+library(Seurat)      # For creating and handling Seurat objects
+library(Matrix)      # For working with sparse matrices
+library(dplyr)       # For data manipulation
+library(stringr)     # For string operations like pattern matching
 
-# === Set data directory ===
+# === Set working directory containing filtered matrix output ===
 data_dir <- "/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/R_rhapsody2.3/Soupx_filtered/output_mtx/annotated_barcodes"  
 setwd(data_dir)
 
-# === Step 1: Find all matrix files ===
+# === Step 1: Identify all matrix files ===
+# Find all .mtx.gz files (one per sample)
 matrix_files <- list.files(pattern = "_matrix\\.mtx\\.gz$")
 
-# === Step 2: Initialize list for Seurat objects ===
+# === Step 2: Create a list to hold Seurat objects ===
 seurat_list <- list()
 
+# Loop over each matrix file and process it
 for (file in matrix_files) {
-  # Extract sample name prefix
+  # Extract sample name by removing suffix from filename
   sample_name <- str_remove(file, "_matrix\\.mtx\\.gz$")
   
-  message("🔄 Processing: ", sample_name)
+  message("🔄 Processing: ", sample_name)  # Log progress
   
-  # Define file paths
-  matrix_path   <- gzfile(paste0(sample_name, "_matrix.mtx.gz"), "rt")
-  barcodes_path <- paste0(sample_name, "_barcodes.csv.gz")
+  # === Define input file paths ===
+  matrix_path   <- gzfile(paste0(sample_name, "_matrix.mtx.gz"), "rt")         # Expression matrix
+  barcodes_path <- paste0(sample_name, "_barcodes.csv.gz")                     # Try CSV first
   if (!file.exists(barcodes_path)) {
-    barcodes_path <- paste0(sample_name, "_barcodes.tsv.gz")
+    barcodes_path <- paste0(sample_name, "_barcodes.tsv.gz")                   # Fallback to TSV
   }
-  features_path <- gzfile(paste0(sample_name, "_features.tsv.gz"), "rt")
+  features_path <- gzfile(paste0(sample_name, "_features.tsv.gz"), "rt")       # Feature/gene info
   
-  # === Read matrix ===
-  counts <- readMM(matrix_path)
+  # === Load sparse count matrix ===
+  counts <- readMM(matrix_path)  # Matrix Market format
   
-  # === Read barcodes ===
+  # === Load barcodes (cell IDs) ===
   barcodes <- read.delim(gzfile(barcodes_path), header = TRUE, stringsAsFactors = FALSE)
-  colnames(counts) <- barcodes$V1
+  colnames(counts) <- barcodes$V1  # Assign barcodes to columns of matrix
   
-  # === Read features ===
+  # === Load features (gene names) ===
   features <- read.delim(features_path, header = FALSE, stringsAsFactors = FALSE)
-  rownames(counts) <- features$V1
+  rownames(counts) <- features$V1  # Assign gene IDs to rows of matrix
   
-  # === Create Seurat object ===
+  # === Create Seurat object for the current sample ===
   seu <- CreateSeuratObject(counts = counts, project = sample_name)
   
-  # Add sample ID metadata
+  # Annotate metadata with sample ID
   seu$orig.ident <- sample_name
   seu$Sample_Name <- sample_name
   
-  # Add to list
+  # Store in the list
   seurat_list[[sample_name]] <- seu
 }
 
-# === Step 3: Merge all into one Seurat object ===
+# === Step 3: Merge all Seurat objects into one ===
 merged_seurat <- merge(
-  seurat_list[[1]],
-  y = seurat_list[-1],
-  add.cell.ids = names(seurat_list),
+  seurat_list[[1]],                # First object
+  y = seurat_list[-1],            # All other objects
+  add.cell.ids = names(seurat_list),  # Prefix cell names with sample ID
   project = "Merged_cMoP"
 )
 
-# === Optional: Save merged object ===
-saveRDS(merged_seurat, file = "/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/R_rhapsody2.3/Soupx_filtered/merged_cMoP_seurat.rds")
+# === Step 4: Save merged object to disk ===
+saveRDS(
+  merged_seurat, 
+  file = "/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/R_rhapsody2.3/Soupx_filtered/merged_cMoP_seurat.rds"
+)
 
-# Done!
+# === Final message ===
 print("✅ Merging complete.")
 print(merged_seurat)
