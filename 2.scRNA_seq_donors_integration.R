@@ -4,7 +4,7 @@
 # Load raw object
 cMoP <- readRDS("/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/R_rhapsody2.3/cMoP_raw.rds")
 # Remove stressed cluster (cluster 3)
-cMoP <- subset(cMoP, cells = kore,invert=TRUE) ### exclude cluster 3 (stressed cells)
+cMoP <- subset(cMoP, idents = 3,invert=TRUE) ### exclude cluster 3 (stressed cells)
 
 # Reset assay and clean metadata
 DefaultAssay(cMoP) <- "RNA"
