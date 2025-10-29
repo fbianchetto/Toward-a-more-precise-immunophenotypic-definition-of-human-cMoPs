@@ -73,6 +73,8 @@ FeatureScatter_scCustom(cMoP, feature1 = "percent_lncRNA", feature2 = "percent_T
 ## 4. Normalization, dimensionality reduction, clustering
 ###################################################################################################
 DefaultAssay(cMoP) <- "RNA"
+cMoP <- JoinLayers(cMoP)
+cMoP[["RNA"]] <- split(cMoP[["RNA"]], f = cMoP$donor)
 cMoP <- SCTransform(cMoP, vars.to.regress = c("S.Score","G2M.Score"), verbose = FALSE)
 cMoP <- RunPCA(cMoP) |> FindNeighbors(dims = 1:50) |> 
   FindClusters(resolution = 0.1, cluster.name = "unintegrated_clusters", algorithm = 4) |>
