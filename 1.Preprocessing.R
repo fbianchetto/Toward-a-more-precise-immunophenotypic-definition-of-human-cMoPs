@@ -114,7 +114,7 @@ DotPlot(cMoP, features = unique(top_markers$gene), dot.scale = 4, cluster.idents
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10))
 
 ###################################################################################################
-## 6. Save object
+## 7. Save object
 ###################################################################################################
 saveRDS(cMoP, file = "/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/R_rhapsody2.3/cMoP_raw.rds")
 
