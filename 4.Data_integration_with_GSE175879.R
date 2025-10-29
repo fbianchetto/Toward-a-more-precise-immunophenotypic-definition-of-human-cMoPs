@@ -178,7 +178,7 @@ for (i in seq_along(res)) {
 gridExtra::grid.arrange(grobs = plot_list, ncol = 4)
 
 # Save integrated object
-saveRDS(integrated_seurat,file = "/home/patgen/OneDrive/GenomeBrowser/Cell/integrated_seurat_harmony_selected_setting.rds")
+saveRDS(integrated_seurat,file = "/home/patgen/OneDrive/cMoP/PNAS/R_script/integrated_seurat_harmony_selected_setting.rds")
 
 ###################################################################################################
 ## 8. CLUSTER VISUALIZATION AND MARKER DISCOVERY
