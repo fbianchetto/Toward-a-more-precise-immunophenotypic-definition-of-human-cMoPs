@@ -393,23 +393,6 @@ reduction = "umap_harmony"
 palcolor = c("#7F3C8D", "#E69F00", "#0072B2", "#009E73", "#8B0000")
 dirpath = "/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/Cell/Velocity/Plots_white"
 res = "SCT_snn_res.0.6"
-seurat_obj_subset_computed <- RunSCVELO(
+seurat_velocity_computed <- RunSCVELO(
   srt = seurat_obj_subset, group_by = res,mode ="dynamical",magic_impute = TRUE,palcolor="#FFFFFF00",dpi = 1200,dirpath=dirpath,
   linear_reduction = "pca", nonlinear_reduction = reduction,n_pcs=30,calculate_velocity_genes=FALSE,save = TRUE)
-
-seurat_obj_subset_computed$SCT_snn_res.0.6 <- factor(seurat_obj_subset_computed$SCT_snn_res.0.6,levels = c(1,2,4,5,3))
-FeatureStatPlot(srt = seurat_obj_subset_computed, group.by = "SCT_snn_res.0.6", bg.by = NULL, stat.by = c("latent_time"), add_box = TRUE,
-                comparisons = list(c("1","2"),c("2","4"),c("4","5"),c("5","3")),palcolor =palcolor,
-                ylab="dynamical pseudotime",title = "RNA velocity latent time") + NoLegend()
-
-# Plot RNA velocity
-VelocityPlot(seurat_obj_subset_computed)
-
-pdf("/home/patgen/OneDrive/GenomeBrowser/Cell/figures/RNA_velocity_dinamic_pseudotime_soupx.pdf", width = 4, height = 5, useDingb = FALSE)
-palcolor = c("#7F3C8D", "#E69F00", "#0072B2", "#009E73", "#8B0000")
-FeatureStatPlot(srt = seurat_obj_subset_computed, group.by = "SCT_snn_res.0.6", bg.by = NULL, stat.by = c("dynamical_pseudotime"), add_box = TRUE,
-                comparisons = list(c("1","2"),c("2","4"),c("4","5"),c("5","3")),palcolor =palcolor,
-                ylab="dynamical pseudotime",title = "RNA velocity dynamical Pseudotime") + NoLegend()
-
-dev.off()
-
