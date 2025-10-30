@@ -396,3 +396,4 @@ res = "SCT_snn_res.0.6"
 seurat_velocity_computed <- RunSCVELO(
   srt = seurat_obj_subset, group_by = res,mode ="dynamical",magic_impute = TRUE,palcolor="#FFFFFF00",dpi = 1200,dirpath=dirpath,
   linear_reduction = "pca", nonlinear_reduction = reduction,n_pcs=30,calculate_velocity_genes=FALSE,save = TRUE)
+saveRDS(seurat_velocity_computed, file = "seurat_velocity_computed.rds")
