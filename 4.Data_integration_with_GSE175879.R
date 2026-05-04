@@ -31,7 +31,7 @@ seurat_runs123 <- merge(donor_list[[1]],y = c(donor_list[[2]], donor_list[[3]]),
 ## LOAD AND CLEAN THE INTEGRATED cMoP OBJECT (RUN4)
 ###################################################################################################
 
-cMoP <- readRDS(file = "/home/patgen/OneDrive/cMoP/PNAS/R_script/cMoP_integrated.rds")
+cMoP <- readRDS(file = "/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/cMoP_integrated.rds")
 
 # Visualize integrated object before subsetting
 DimPlot_scCustom(cMoP, reduction = "umap.harmony")
@@ -91,13 +91,13 @@ merged_seurat$batch <- paste(merged_seurat$run, merged_seurat$donor, sep = "_")
 merged_seurat$batch <- gsub("_cMoP", "", merged_seurat$batch)
 
 # Save merged Seurat object
-saveRDS(merged_seurat, file = "/home/patgen/OneDrive/cMoP/PNAS/R_script/merged_seurat.rds")
+saveRDS(merged_seurat, file = "/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/merged_seurat.rds")
 
 ###################################################################################################
 ## 4. SCTransform NORMALIZATION
 ###################################################################################################
 
-filtered_seurat = readRDS("/home/patgen/OneDrive/cMoP/PNAS/R_script/merged_seurat.rds")
+filtered_seurat = readRDS("/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/merged_seurat.rds")
 
 # Split object by batch for SCTransform normalization
 seurat_list <- SplitObject(filtered_seurat, split.by = "batch")
@@ -178,7 +178,7 @@ for (i in seq_along(res)) {
 gridExtra::grid.arrange(grobs = plot_list, ncol = 4)
 
 # Save integrated object
-saveRDS(integrated_seurat,file = "/home/patgen/OneDrive/cMoP/PNAS/R_script/integrated_seurat_harmony_selected_setting.rds")
+saveRDS(integrated_seurat,file = "/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/integrated_seurat_harmony_selected_setting.rds")
 
 ###################################################################################################
 ## 8. CLUSTER VISUALIZATION AND MARKER DISCOVERY
@@ -187,7 +187,7 @@ library(scCustomize)
 
 # Load integrated object
 integrated_seurat <- readRDS(
-  file = "/home/patgen/OneDrive/GenomeBrowser/Cell/integrated_seurat_harmony_selected_setting.rds")
+  file = "/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/integrated_seurat_harmony_selected_setting.rds")
 
 # Visualize selected resolution
 DimPlot_scCustom(integrated_seurat,reduction = "umap_harmony",group.by = c("SCT_snn_res.0.6"),label = TRUE,label.size = 8) + NoLegend()
