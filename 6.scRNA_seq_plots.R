@@ -1,5 +1,5 @@
 ########################################################################################################################
-# cMoP PNAS Figure Generation Script — Final Polished Version
+# cMoP Cell Reports Figure Generation Script
 # Author: Francisco Bianchetto
 # Description:
 #   Generates publication-quality figures (Figure 1C and Figure 2A–D)
@@ -15,18 +15,18 @@ library(RColorBrewer)
 library(SCP)
 
 # Output directory
-outdir <- "/home/patgen/OneDrive/cMoP/PNAS/Plots"
+outdir <- "/home/patgen/OneDrive/cMoP/Cell_Reports/Plots"
 
 # Color palettes
 pal_cells     <- c("#D600D6", "#9EB8FC")  # Figure 1C
 pal_clusters  <- c("#7F3C8D", "#E69F00", "#0072B2", "#009E73", "#8B0000")  # Figures 2A–D
 
 # --------------------------------------------
-# Figure 1C — UMAP by cell type (Harmony reduction)
+# Figure 1C - UMAP by cell type (Harmony reduction)
 # --------------------------------------------
 
 # Load integrated cMoP dataset
-cMoP <- readRDS("/home/patgen/OneDrive/cMoP/PNAS/R_script/cMoP_integrated.rds")
+cMoP <- readRDS("/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/cMoP_integrated.rds")
 
 # UMAP colored by "cells" (merged view)
 p1 <- CellDimPlot(
@@ -58,11 +58,11 @@ print(p2)
 dev.off()
 
 # --------------------------------------------
-# Figure 2A — Cluster UMAP (Harmony reduction)
+# Figure 2A - Cluster UMAP (Harmony reduction)
 # --------------------------------------------
 
 # Load integrated object with cluster assignments
-seurat_clusters <- readRDS("/home/patgen/OneDrive/cMoP/PNAS/R_script/integrated_seurat_harmony_selected_setting_clusters.rds")
+seurat_clusters <- readRDS("/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/integrated_seurat_harmony_selected_setting_clusters.rds")
 
 Idents(seurat_clusters) <- "SCT_snn_res.0.6"
 seurat_clusters$clusters <- factor(paste0("c", seurat_clusters$SCT_snn_res.0.6),
@@ -82,7 +82,7 @@ CellDimPlot(
 dev.off()
 
 # --------------------------------------------
-# Figure 2B — DotPlot of selected marker genes
+# Figure 2B - DotPlot of selected marker genes
 # --------------------------------------------
 
 # Marker genes for cluster comparison
@@ -110,11 +110,11 @@ DotPlot(seurat_clusters, features = genes, dot.scale = 4, cluster.idents = FALSE
 dev.off()
 
 # --------------------------------------------
-# Figure 2C — RNA Velocity UMAP
+# Figure 2C - RNA Velocity UMAP
 # --------------------------------------------
 
 # Load Seurat object with RNA velocity results
-seurat_velocity <- readRDS("/home/patgen/OneDrive/cMoP/PNAS/R_script/seurat_velocity_computed.rds")
+seurat_velocity <- readRDS("/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/seurat_velocity_computed.rds")
 
 seurat_velocity$clusters <- factor(paste0("c", seurat_velocity$SCT_snn_res.0.6),
                                    levels = c("c1", "c2", "c3", "c4", "c5"))
@@ -168,7 +168,7 @@ velocito
 dev.off()
 
 # --------------------------------------------
-# Figure 2D — Dynamical pseudotime distribution
+# Figure 2D - Dynamical pseudotime distribution
 # --------------------------------------------
 
 # Reorder clusters according to pseudotime progression
