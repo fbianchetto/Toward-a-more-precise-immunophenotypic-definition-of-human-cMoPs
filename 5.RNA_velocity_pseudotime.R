@@ -9,7 +9,7 @@ source("/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/Helper_functions
 ####### RNA velocity analysis
 
 # Load the integrated Seurat object
-integrated_seurat <- readRDS(file = "/home/patgen/OneDrive/cMoP/PNAS/R_script/integrated_seurat_harmony_selected_setting.rds")
+integrated_seurat <- readRDS(file = "/home/patgen/OneDrive/cMoP/Cell_Reports/R_script/integrated_seurat_harmony_selected_setting.rds")
 seurat_obj <- integrated_seurat
 
 # Ensure compatibility with Seurat v3 assays
