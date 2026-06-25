@@ -9,7 +9,7 @@ cMoP transcriptional identity, refining their definition at single-cell resoluti
 ## scRNA-seq workflow: CLEC12A⁺CD64ʰⁱ vs CD115⁺CD64ʰⁱ/ⁱⁿᵗ monocyte progenitors (cMoPs)
 
 <p align="center">
-  <img src="figures/analysis_workflow.jpg" width="800"/>
+  <img src="figures/analysis_workflow.jpg" width="200"/>
   <br>
 </p>
 
