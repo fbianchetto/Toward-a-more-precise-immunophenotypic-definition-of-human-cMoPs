@@ -11,7 +11,6 @@ cMoP transcriptional identity, refining their definition at single-cell resoluti
 <p align="center">
   <img src="figures/analysis_workflow.jpg" width="800"/>
   <br>
-  <em>Figure 1. ...</em>
 </p>
 
 ## Data
