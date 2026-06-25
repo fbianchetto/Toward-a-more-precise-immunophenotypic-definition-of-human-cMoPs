@@ -1,7 +1,7 @@
 ## Toward a more precise immunophenotypic definition of human cMoPs
 
 ## Abstract
-We used scRNA-seq to compare CLEC12A⁺CD64ʰⁱ and CD115+CD64ʰⁱ/ⁱⁿᵗ monocyte 
+We used scRNA-seq to compare CLEC12A⁺CD64ʰⁱ and CD115⁺CD64ʰⁱ/ⁱⁿᵗ monocyte 
 progenitors (cMoPs) and assess whether they represent the same population. 
 Our analysis revealed that CD115-based gating more accurately captures the 
 cMoP transcriptional identity, refining their definition at single-cell resolution.
@@ -9,7 +9,7 @@ cMoP transcriptional identity, refining their definition at single-cell resoluti
 ## scRNA-seq workflow: CLEC12A⁺CD64ʰⁱ vs CD115⁺CD64ʰⁱ/ⁱⁿᵗ monocyte progenitors (cMoPs)
 
 <p align="center">
-  <img src="figures/analysis_workflow.jpg" width="400"/>
+  <img src="figures/scRNA-seq analysis workflow.jpg" width="200"/>
   <br>
 </p>
 
