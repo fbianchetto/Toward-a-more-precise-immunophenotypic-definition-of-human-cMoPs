@@ -4,7 +4,7 @@ library(Seurat)
 library(FNN)          
 library(igraph)        # 
 library(SCP)           # For RNA velocity and trajectory analysis
-source("/home/patgen/working_dir/Data_analysis/SingleCells_cMoP/Helper_functions.R")  # Custom helper functions
+source("/home/patgen/OneDrive/cMoP/Cell_Reports/Toward-a-more-precise-immunophenotypic-definition-of-human-cMoPs/Helper_functions.R")  # Custom helper functions
 #########################################################################################################################
 ####### RNA velocity analysis
 
