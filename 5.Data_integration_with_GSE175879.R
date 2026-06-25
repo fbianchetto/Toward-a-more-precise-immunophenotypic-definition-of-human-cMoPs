@@ -10,6 +10,7 @@ donor_list <- readRDS(
 donor_list <- lapply(donor_list, function(x) {
   subset(x, subset = Sample_Name == "cMoP" & DoubletFinder == "Singlet")
   subset(x, subset = nFeature_RNA > 500 & percent_mito < 25)
+  filter_genes(x)
 })
 
 # Annotate donor IDs manually
