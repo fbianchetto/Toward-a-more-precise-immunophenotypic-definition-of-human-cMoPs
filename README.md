@@ -1,5 +1,5 @@
 ## Toward a more precise immunophenotypic definition of human cMoPs
-
+[![DOI](https://zenodo.org/badge/1024824144.svg)](https://doi.org/10.5281/zenodo.21889358)
 ## Abstract
 We used scRNA-seq to compare CLEC12A⁺CD64ʰⁱ and CD115⁺CD64ʰⁱ/ⁱⁿᵗ monocyte 
 progenitors (cMoPs) and assess whether they represent the same population. 
